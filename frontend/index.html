@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoSync | AI Planet Assistant</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container nav-content">
+            <div class="brand">🌱 <span>EcoSync AI</span></div>
+            <div class="nav-badge">Hackathon Entry: Technology for Planet</div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <!-- Live Metrics Banner -->
+        <section class="metrics-banner">
+            <div class="metric-card">
+                <span class="metric-icon">♻️</span>
+                <div>
+                    <h3 id="stat-items">0</h3>
+                    <p>Items Sorted</p>
+                </div>
+            </div>
+            <div class="metric-card">
+                <span class="metric-icon">🌍</span>
+                <div>
+                    <h3 id="stat-co2">0.0 kg</h3>
+                    <p>Community CO₂ Saved</p>
+                </div>
+            </div>
+            <div class="metric-card">
+                <span class="metric-icon">⚡</span>
+                <div>
+                    <h3 id="stat-points">0</h3>
+                    <p>Eco-Points Earned</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="main-grid">
+            <!-- Vision & Text Waste Intelligence -->
+            <section class="card">
+                <div class="card-header">
+                    <h2>📷 Multimodal AI Waste Inspector</h2>
+                    <p>Upload a photo or describe waste to get instant, deep environmental analytics.</p>
+                </div>
+
+                <div class="dropzone" id="dropzone">
+                    <input type="file" id="file-input" accept="image/*" class="file-input">
+                    <div class="dropzone-content" id="dropzone-prompt">
+                        <span class="upload-icon">📤</span>
+                        <p><strong>Click to upload photo</strong> or drag image here</p>
+                        <small>Supports PNG, JPG, WEBP</small>
+                    </div>
+                    <img id="image-preview" class="image-preview hidden" alt="Waste preview">
+                </div>
+
+                <div class="divider">OR DESCRIBE ITEM</div>
+
+                <div class="input-group">
+                    <input type="text" id="waste-text" placeholder="e.g., Plastic milk jug with cap, takeaway coffee cup">
+                    <button id="btn-analyze-waste" class="btn-primary">Inspect Waste Item</button>
+                </div>
+
+                <div id="waste-loader" class="loader hidden">
+                    <div class="spinner"></div>
+                    <p>Analyzing materials, toxicity, and decomposition profiles...</p>
+                </div>
+
+                <!-- Rich Waste Analysis Output -->
+                <div id="waste-result" class="result-card hidden">
+                    <div class="result-header">
+                        <div>
+                            <h3 id="waste-item-name">Detected Item</h3>
+                            <div id="waste-materials" class="tags-container"></div>
+                        </div>
+                        <span id="waste-badge" class="badge">Category</span>
+                    </div>
+
+                    <div class="info-grid">
+                        <div class="info-box">
+                            <span class="info-label">⏳ Decomposition Lifespan</span>
+                            <p id="waste-decomposition" class="info-value">--</p>
+                        </div>
+                        <div class="info-box">
+                            <span class="info-label">🏆 Eco-Points Earned</span>
+                            <p id="waste-points" class="info-value highlight-gold">+0 Pts</p>
+                        </div>
+                    </div>
+
+                    <div class="section-block">
+                        <h4>📋 Proper Disposal Steps</h4>
+                        <ol id="waste-steps" class="steps-list"></ol>
+                    </div>
+
+                    <div class="section-block highlight-box">
+                        <h4>💡 DIY Upcycling Idea</h4>
+                        <p id="waste-upcycle">--</p>
+                    </div>
+
+                    <div class="section-block">
+                        <h4>🌎 Environmental Benefit</h4>
+                        <p id="waste-impact">--</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Carbon Footprint & Analytics -->
+            <div class="right-column">
+                <section class="card">
+                    <div class="card-header">
+                        <h2>⚡ Carbon Footprint Intelligence</h2>
+                        <p>Evaluate activities to discover immediate emission reductions.</p>
+                    </div>
+
+                    <div class="input-group">
+                        <input type="text" id="carbon-text" placeholder="e.g., Driving 25 miles in SUV, 45 min hot shower">
+                        <button id="btn-calculate-carbon" class="btn-secondary">Calculate Emissions</button>
+                    </div>
+
+                    <div id="carbon-loader" class="loader hidden">
+                        <div class="spinner"></div>
+                        <p>Computing life-cycle CO₂ equivalents...</p>
+                    </div>
+
+                    <!-- Rich Carbon Output -->
+                    <div id="carbon-result" class="result-card hidden">
+                        <div class="co2-hero">
+                            <span id="carbon-val" class="co2-number">0.0</span>
+                            <span class="co2-unit">kg CO₂</span>
+                        </div>
+
+                        <div class="equivalents-grid">
+                            <div class="eq-card">
+                                <span class="eq-icon">🌲</span>
+                                <p id="eq-trees">0</p>
+                                <small>Days Tree Absorption</small>
+                            </div>
+                            <div class="eq-card">
+                                <span class="eq-icon">🚗</span>
+                                <p id="eq-car">0 mi</p>
+                                <small>Gas Car Miles</small>
+                            </div>
+                            <div class="eq-card">
+                                <span class="eq-icon">📱</span>
+                                <p id="eq-phones">0</p>
+                                <small>Phone Charges</small>
+                            </div>
+                        </div>
+
+                        <div class="section-block">
+                            <h4>⚡ Quick Immediate Action</h4>
+                            <p id="carbon-immediate">--</p>
+                        </div>
+
+                        <div class="section-block highlight-box-blue">
+                            <h4>🌱 Long-Term Habit Replacement</h4>
+                            <p id="carbon-habit">--</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Upgraded Visual Chart -->
+                <section class="card chart-card">
+                    <div class="card-header">
+                        <h2>📊 Community Waste Breakdown</h2>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="impactChart"></canvas>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
