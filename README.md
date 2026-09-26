@@ -1,0 +1,1 @@
+# EcoSync---AI-Powered-Waste-Sorting-Carbon-Tracking-Platform
